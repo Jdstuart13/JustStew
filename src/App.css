@@ -1,28 +1,132 @@
-.App {
-  text-align: center;
+body, html {
+    height:100%;
+    color:#5b1d68;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+#root{
+    height: 100%;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+body {
+  margin: 0;
+  background: linear-gradient(#5b1d68,#c6486e,#ffbe02);
+  font: 14px "Century Gothic", Futura, sans-serif;
+  overflow: hidden;
+  }
+
+ol, ul {
+  padding-left: 30px;
 }
 
-.App-title {
-  font-size: 1.5em;
+.background {
+	height: 100%;
+    background-position:0% 110%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url("Skyline.png");
+        
 }
 
-.App-intro {
-  font-size: large;
+.header {
+     width: 33%;
+     margin-top: 1%;
+     margin-right: -2%;
+	 float: right;
+    background-color: #cecbda;
+}
+.header h1{
+    margin-top: 0;
+    margin-bottom: 0;
+    color:#5b1d68;
+    float: right;
+    padding-right: 10%;
+    font-size: 3vmax;
+    
+}
+.sky{
+    clear: both;
+}
+.canopy {
+	font-size: 3vmin;
+}
+.cloudContent{
+    
+    font-size: 1.5vmin;
+    width: 90%;
+    padding: 5%;
+    margin: 5%;
+    background-color: #cecbda;
+}
+.cloudContent h1{
+    
+	font-size: 1.7em;
+    border-bottom: solid black 1px;
+}
+.branch{
+    font-size: 2vmin;
+}
+.cloud {
+    text-align: center;
+    height: 100%;
+    width: auto;
+    background-position:center;
+    padding: 7.5%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-image: url("Cloud.png");
+    z-index: 2;
+  margin: 2%
+  
+}
+.flex{
+    margin-right: 5%;   
+    margin-left: 5%;
+    display: flex;
+    justify-content:center;
+}
+.flexInt{
+    color: black;
+    display: flex;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.halfBox{
+    height: auto;
+    width: 50%;
+    margin-right: 15%;
+    
+    
+}
+.skirilla {
+    height: 80%;
+     width: 35%;
+     
+   
+
+}
+
+
+.cloud:focus {
+  outline: none;
+}
+
+.kbd-navigation .cloud:focus {
+  background: #ddd;
+}
+
+.example-enter {
+  opacity: 0.01;
+}
+
+.example-enter.example-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+.example-leave {
+  opacity: 1;
+}
+
+.example-leave.example-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
 }
