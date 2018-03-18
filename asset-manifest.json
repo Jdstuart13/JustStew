@@ -1,8 +1,21 @@
 {
-  "main.css": "static/css/main.4bcc433e.css",
-  "main.css.map": "static/css/main.4bcc433e.css.map",
-  "main.js": "static/js/main.cf38dabe.js",
-  "main.js.map": "static/js/main.cf38dabe.js.map",
-  "static\\media\\Cloud.png": "static/media/Cloud.5f0e661f.png",
-  "static\\media\\Skyline.png": "static/media/Skyline.0649cb7f.png"
+  "main.css": "static/css/main.ed036485.css",
+  "main.css.map": "static/css/main.ed036485.css.map",
+  "main.js": "static/js/main.551dae85.js",
+  "main.js.map": "static/js/main.551dae85.js.map",
+  "static\\media\\ClassroomTech.jpg": "static/media/ClassroomTech.1c3792ff.jpg",
+  "static\\media\\HTML.png": "static/media/HTML.b012fc7e.png",
+  "static\\media\\Javascript.png": "static/media/Javascript.0cded3a3.png",
+  "static\\media\\Python.png": "static/media/Python.9d460ec0.png",
+  "static\\media\\QuestromTools.PNG": "static/media/QuestromTools.e544e4b2.PNG",
+  "static\\media\\SQL.png": "static/media/SQL.68b90c5c.png",
+  "static\\media\\css3.png": "static/media/css3.e985642a.png",
+  "static\\media\\dataMining.png": "static/media/dataMining.f04b991e.png",
+  "static\\media\\genzyme.jpg": "static/media/genzyme.9985e0d3.jpg",
+  "static\\media\\headphones.jpg": "static/media/headphones.9e805b20.jpg",
+  "static\\media\\logo.svg": "static/media/logo.5d5d9eef.svg",
+  "static\\media\\react.png": "static/media/react.a1aee821.png",
+  "static\\media\\siteBackgroundBasicVector.gif": "static/media/siteBackgroundBasicVector.dd22f3bf.gif",
+  "static\\media\\stata.jpg": "static/media/stata.4b8bbe7a.jpg",
+  "static\\media\\studentBlog.PNG": "static/media/studentBlog.03100f9e.PNG"
 }
