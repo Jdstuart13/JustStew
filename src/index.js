@@ -3,34 +3,111 @@ import ReactDOM from 'react-dom';
 import './App.css';
 import defaultExport   from './react-transition-group';
 import registerServiceWorker from './registerServiceWorker';
+import {tree} from './Content/TREE.js';
 
 
 
-function Cloud(props) {
-     if (props.weather == null){
+function Story(props){
+    var classes="";
+    if (props.weather == null){
          return (null);
      }
     else{
-       var classes = "cloud " + props.pos;
-       if(props.weather=="Active Child" || props.content==null){
-        return(
-         <div className={classes} onClick={props.onClick}>
-            {props.name} 
-         </div>
-        );
-       }
-      else{
-          classes="cloudContent";
-          return(
+   
+     if(props.weather == "Active Child") {
+          classes += "square ";
+          classes +=props.pos;
+         return (
           <div className={classes} onClick={props.onClick}>
             <h1>{props.name}</h1>
-             {props.content}
-         </div>
-          
-          )
-      }
+           </div>
+         );
+            }
+    else{
+        classes+= "contentHeader ";
+        classes+= props.pos;
+        return(
+        <div className="content">
+        <div className={classes} onClick={props.onClick}>
+          <h1>{props.name}</h1> 
+          <h1>Back</h1>
+        </div>
+        <div className = "contentBody">   
+            <div className = "contentCol">
+                {props.column1}
+            </div>    
+            <div className = "contentCol">
+                {props.column2}
+            </div>   
+        </div>
+        </div>
+        );
+     }
     }
-    
+}
+
+function Cloud(props) {
+     var classes ="";
+     if (props.weather == null){
+         return (null);
+     }
+    else {
+       classes += "square ";
+       classes+=props.pos;
+       if(props.weather=="Active Child"){
+        classes+=" Canopy";
+        return(
+         <div className={classes} onClick={props.onClick}>
+            <h1>{props.name}</h1>
+         </div>
+        );
+       }   else{
+        return(
+        <div className={classes} onClick={props.onClick}>
+            <h1>Back </h1>
+         </div>
+        );
+           
+       }
+    } 
+}
+
+function Gallery(props){
+  var classes="";
+    if (props.weather == null){
+         return (null);
+     }
+    else{
+   
+     if(props.weather == "Active Child") {
+          classes += "square ";
+          classes += "Canopy ";
+          classes +=props.pos;
+         return (
+          <div className={classes} onClick={props.onClick}>
+            <h1>{props.name}</h1>
+           </div>
+         );
+            }
+    else{
+        classes+= "contentHeader ";
+        classes+= props.pos;
+        var  display=[];
+        for (var x=0; props.gallery.length>x;x++){
+            display.push(<div className="frame">{props.gallery[x]}</div>
+            );
+        }
+        return(
+        <div className="content">
+        <div className={classes} onClick={props.onClick}>
+          <h1>{props.name}</h1> 
+          <h1>Back</h1>
+        </div>
+        <div className = "contentBody">{display}</div>
+        </div>
+        );
+     }
+    }
 }
      
     
@@ -40,7 +117,6 @@ class Sky extends React.Component {
   
   constructor(props) {
     super(props);
-    
     this.state = {
       clouds: this.props.tree.map((weather) => {
         if(weather.parent==="None"){
@@ -51,6 +127,7 @@ class Sky extends React.Component {
         }
       }
     ),
+     
     };
       
   }
@@ -58,6 +135,7 @@ class Sky extends React.Component {
   handleClick(i) {
     const weather = this.state.clouds[i];
     const clouds = this.state.clouds.slice().fill(null);
+    
     if (weather=="Active"){
         var up =this.props.tree[i].parent;
         for (let x = 0; clouds.length>x; x++){
@@ -69,7 +147,6 @@ class Sky extends React.Component {
             if (this.props.tree[x].name==up){
                 clouds[x] = "Active";
             }
-    
         }
     
     }
@@ -82,9 +159,8 @@ class Sky extends React.Component {
          clouds[i] = 'Active'; 
     }
    
-        
-    
-    this.setState({clouds: clouds});
+    this.setState({clouds: clouds,
+                  });
   }
 
   renderCloud(i) {
@@ -96,143 +172,83 @@ class Sky extends React.Component {
         weather={this.state.clouds[i]}
         onClick={() => this.handleClick(i)}
         pos = {this.props.tree[i].class}
-        content = {this.props.tree[i].content}
 
       />
     );
   }
+  renderStory(i) {
+      return(
+        <Story
+        name = {this.props.tree[i].name}
+        weather={this.state.clouds[i]}
+        onClick={() => this.handleClick(i)}
+        pos = {this.props.tree[i].class}
+        column1 = {this.props.tree[i].column1}
+        column2 = {this.props.tree[i].column2}
+        />
+      )
+}
+    renderGallery(i){
+        console.log(this.props.tree[i].gallery);    
+        return(
+        <Gallery
+        name = {this.props.tree[i].name}
+        weather={this.state.clouds[i]}
+        onClick={() => this.handleClick(i)}
+        pos = {this.props.tree[i].class}
+        gallery = {this.props.tree[i].gallery}
+        />
+        
+        );
+    }
 
-  render() {
-   
-    const status = 'Next player: X';
-    return (
-      <div className = "background">
-        
-        <div className = "header">
-         <h1> James Stuart </h1>
-        </div>
-    
-        <div className = "sky">
-        <div className = "flex">
-       
-        
-        {this.renderCloud(0)}
-          {this.renderCloud(1)}
-          {this.renderCloud(2)}
-    
-        </div>
-        <div className = "flex">
+  renderSky(){
+      const sky = this.props.tree;
+      var out=[];
+      for(var i = 0; sky.length>i; i++){
+          if(sky[i].type=="Cloud"){
+               out.push(this.renderCloud(i));
+          }
+      else if(sky[i].type=="Gallery"){
+          out.push(this.renderGallery(i));
+      }
       
+      else{
+           out.push(this.renderStory(i));
+      }
         
-            {this.renderCloud(3)}
-          {this.renderCloud(4)}
-          {this.renderCloud(5)}
-          {this.renderCloud(6)}
-          {this.renderCloud(7)}
-          {this.renderCloud(8)}
-            </div>
+  }
+      return out;     
+  }
+  render() {
+
+    
+    
+    return (
+   
+      <div className =  "background">
+         
+        <div className = "header">
+         <h1> James Stuart (Work in Progress) </h1>
+          
         </div>
+      
+        <div className = "flex">
+        {this.renderSky()}
+      </div>
+
      </div>
 
     );
   }
 }
 class App extends React.Component {
-  
   render() {
-     const TREE =[
-      {name:"Projects",
-       parent: "None",
-       class: "canopy"
-       
-      },
-        {
-        name:"About Me",
-        parent: "None",
-        class: "canopy"
-        
-      },
-       {
-        name:"Skills",
-        parent: "None",
-        class: "canopy"
-        
-      },   
-      {
-        name:"Questrom Study Abroad",
-        parent: "Projects",
-        class: "branch",
-        content: 
-             <div> The name is bond, james bond </div>
-        
-        
-      },
-         {
-        name:"Questrom Tools",
-        parent: "Projects",
-        class: "branch",
-        content: 
-             <div> The name is bond, james bond </div>
-      },
-         
-         {
-        name:"This Site",
-        parent: "Projects",
-        class: "branch",
-        content: 
-             <div> The name is bond, james bond </div>
-             
-      },
-         {
-        name:"Location",
-        parent: "About Me",
-        class: "branch",
-        content: 
-             <div> The name is bond, james bond </div>
-      },
-     {
-        name:"Hobbies",
-        parent: "About Me",
-        class: "branch",
-        content: 
-             <div> The name is bond, james bond </div>
-      },
-         {
-        name:"My First Client",
-        parent: "About Me",
-        class: "branch",
-        content: 
-             
-             <div className ="flexInt">
-             <div className="halfBox">
-             "Through advanced technology known as layer-based image editing software we have created ski’s for gorillas. Never mind that due to a gorilla’s short legs would never be able to properly control a pair of full-sized ski’s, as you can see it is possible and it works perfectly. We are currently working on expanding our line to poles, however, layering ski poles onto a gorilla doesn’t look very natural. Still not convinced? Instagram can’t yet detect photoshop, and if it’s on Instagram it must be real."
-             </div>
-    
-             <img className="skirilla" src = "http://lol.bu.edu/stuart-little/wp-content/uploads/sites/133/2016/10/SOFHD4.1-3.png">
-             </img>
-             
-             
-             
-             </div>
-             
-             
-             
-
-    
-      },
-         {
-        name:"Biz",
-        parent: "About Me",
-        class: "rightBranch",
-        content: 
-             <div> The name is bond, james bond </div>
-      },
-    
-  ];
-
     return (
      
-          <Sky tree = {TREE} />
+          <Sky 
+            tree = {tree}
+          />
     );
   }
 }
